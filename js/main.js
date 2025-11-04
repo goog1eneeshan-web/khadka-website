@@ -122,9 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================
     
     // --- Navigation Toggle and Smooth Scrolling (code remains the same) ---
-    navToggle.addEventListener('click', () => { /* ... */ });
-    navLinks.addEventListener('click', (e) => { /* ... */ });
-    document.querySelectorAll('a[data-scroll]').forEach(anchor => { /* ... */ });
+if (navToggle && navLinks) {
+navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active'); // Toggles the .active class on the navLinks
+    });
+
+    // THIS PART IS ALSO NEEDED TO CLOSE THE MENU
+    navLinks.addEventListener('click', (e) => {
+        // Check if a link inside the nav was clicked
+        if (e.target.closest('a')) { 
+            navLinks.classList.remove('active'); // Always close menu after click
+        }
+    });
+}
     
     // --- Navbar scroll behavior (Shadow & Hide) ---
     let lastScroll = 0;
